@@ -25,7 +25,7 @@ public class MainActivity extends FragmentActivity {
 	
 	//test code that's probably going to be gotten rid of
 	//or evolved into something better
-	public void switchSelectScreen(Fragment frag) throws Exception{
+	public void switchSelectScreen(Fragment frag, Bundle extras) throws Exception{
 		getSupportFragmentManager().beginTransaction().remove(selectScreen).commit();
 		selectScreen = frag.getClass().newInstance();
 		pagerAdapter.notifyDataSetChanged();
