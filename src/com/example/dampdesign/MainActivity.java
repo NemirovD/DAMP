@@ -1,19 +1,23 @@
 package com.example.dampdesign;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.Window;
 
 public class MainActivity extends Activity {
+	PlayerFragment player;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.song_title);
 		setContentView(R.layout.activity_main);
 		
+		player = new PlayerFragment();
+		
+		FragmentTransaction t = getFragmentManager().beginTransaction();
+		t.replace(R.id.main_window,player);
+		t.commit();
 	}
 
 	@Override
