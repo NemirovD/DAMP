@@ -30,7 +30,6 @@ public final class R {
         public static final int player_play_button=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f080006;
         public static final int imageView1=0x7f080001;
         public static final int main_window=0x7f080000;
         public static final int player_fragment_back_button=0x7f080003;
@@ -47,9 +46,7 @@ public final class R {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
     }
     public static final class style {
         /** 
