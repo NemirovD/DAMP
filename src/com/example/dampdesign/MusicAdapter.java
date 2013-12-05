@@ -7,18 +7,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.provider.MediaStore;
 
 public class MusicAdapter extends BaseAdapter {
 	private Context context;
 	private Cursor cursor;
+	private String SongItem1Desc;
+	private String SongItem2Desc;
 	
 	public MusicAdapter(Context c){
 		context = c;
 	}
 	
-	public MusicAdapter(Context c, Cursor cu){
+	public MusicAdapter(Context c, Cursor cu, String s1, String s2){
 		context = c;
 		cursor = cu;
+		SongItem1Desc = s1;
+		SongItem2Desc = s2;
 	}
 
 	@Override
