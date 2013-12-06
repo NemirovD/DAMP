@@ -75,11 +75,11 @@ public class ArtistListAdapter extends BaseAdapter{
 		holder.position = position;
 		cursor.moveToPosition(position);
 
-		holder.songItem1.setText(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM)));
-		holder.songItem2.setText(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST)));
+		holder.songItem1.setText(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
+		holder.songItem2.setText("");
 		
 		String albumart = cursor.getString(cursor
-				.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
+				.getColumnIndex(MediaStore.Audio.Artists.Albums.ALBUM_ART));
 		
 		holder.albumArt.setImageResource(R.drawable.grayscale_logo);
 		(new ImageLoader(holder)).execute(albumart,holder.albumArt);

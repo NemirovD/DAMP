@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.dampdesign.MainActivity;
 import com.example.dampdesign.R;
 import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListFragment;
+import com.example.dampdesign.Fragments.ListFragments.ArtistList.ArtistListFragment;
 import com.example.dampdesign.Fragments.ListFragments.SongList.SongListFragment;
 
 public class WelcomeFragment extends Fragment {
@@ -23,7 +24,8 @@ public class WelcomeFragment extends Fragment {
 		public void onClick(View v) {
 			Bundle extras = new Bundle();
 			try {
-				((MainActivity)getActivity()).switchSelectScreen(new AlbumListFragment(),extras);
+				((MainActivity)getActivity()).switchSelectScreen(new ArtistListFragment(),extras);
+				//
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
