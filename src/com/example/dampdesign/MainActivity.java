@@ -1,5 +1,8 @@
 package com.example.dampdesign;
 
+import com.example.dampdesign.Fragments.PlayerFragment;
+import com.example.dampdesign.Fragments.WelcomeFragment;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -56,7 +59,7 @@ public class MainActivity extends FragmentActivity {
 	
 	
 	private class DampPagerAdapter extends FragmentStatePagerAdapter{
-		//class designed to allow switching to the player
+		//class designed to allow switching to and from player fragment
 		public DampPagerAdapter(FragmentManager fm){
 			super(fm);
 		}

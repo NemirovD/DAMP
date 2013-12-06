@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="80dp"
     android:orientation="horizontal" >
     
     <ImageView 
         android:id="@+id/song_list_item_album_art"
-        android:layout_width="40dp"
-        android:layout_height="fill_parent"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
 
     <TwoLineListItem
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="match_parent" >
 
         <TextView
             android:id="@+id/song_list_item_text_1"
@@ -19,8 +19,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
             android:paddingLeft="20dp"
-            android:textAppearance="?android:attr/textAppearanceListItem"
-            android:textColor="#000000" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+        	android:marqueeRepeatLimit ="marquee_forever"
+        	android:scrollHorizontally="true" />
 
         <TextView
             android:id="@+id/song_list_item_text_2"
@@ -31,7 +35,11 @@
             android:layout_below="@id/song_list_item_text_1"
             android:paddingLeft="20dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+        	android:marqueeRepeatLimit ="marquee_forever"
+        	android:scrollHorizontally="true" />
     </TwoLineListItem>
 
 </LinearLayout>

@@ -1,4 +1,8 @@
-package com.example.dampdesign;
+package com.example.dampdesign.Fragments;
+
+import com.example.dampdesign.R;
+import com.example.dampdesign.R.id;
+import com.example.dampdesign.R.layout;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
