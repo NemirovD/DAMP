@@ -39,20 +39,22 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener{
 				if(isPlayerSet){
 					player.start();
 					v.setBackgroundResource(R.drawable.player_pause_button);
-				}
-			}
-		}
-	};
+				}}}};
+					
 	private OnClickListener backButtonListener = new OnClickListener(){
 		@Override
 		public void onClick(View v) {
-			setSong(queue.getPosition()+1,queue);
+			if(isPlayerSet){
+				setSong(queue.getPosition()+1,queue);
+			}
 		}
 	};
 	private OnClickListener nextButtonListener = new OnClickListener(){
 		@Override
 		public void onClick(View v) {
-			setSong(queue.getPosition()+1,queue);
+			if(isPlayerSet){
+				setSong(queue.getPosition()+1,queue);
+			}
 		}
 	};
 	private Handler seekBarHandler = new Handler();
@@ -71,8 +73,9 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener{
 		View view;
 		view = inflater.inflate(R.layout.player_fragment,container, false);
 		isPlayerSet = false;
-		player = new MediaPlayer();
-		
+		if(player==null){
+			player = new MediaPlayer();
+		}
 		playerCurrentTime = (TextView) view.findViewById(R.id.player_fragment_current_time);
 		playerTotalTime = (TextView) view.findViewById(R.id.player_fragment_total_time);
 		
@@ -148,8 +151,11 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener{
 	@Override
 	public void onStopTrackingTouch(SeekBar arg0) {
 		seekBarHandler.removeCallbacks(updateSeekBarTask);
-		
-		player.seekTo(seekBar.getProgress());
-		seekBarHandler.postDelayed(updateSeekBarTask, 100);
+		if(isPlayerSet){
+			player.seekTo(seekBar.getProgress());
+			seekBarHandler.postDelayed(updateSeekBarTask, 100);
+		}else{
+			seekBar.setProgress(0);
+		}
 	}
 }

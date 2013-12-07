@@ -23,9 +23,8 @@ public class MenuFragment extends Fragment {
 	private OnClickListener songListener = new OnClickListener(){
 		@Override
 		public void onClick(View view) {
-			Bundle extras = new Bundle();
 			try {
-				((MainActivity)getActivity()).switchSelectScreen(new SongListFragment(),extras);
+				((MainActivity)getActivity()).switchSelectScreen(new SongListFragment());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -35,9 +34,8 @@ public class MenuFragment extends Fragment {
 	private OnClickListener albumListener = new OnClickListener(){
 		@Override
 		public void onClick(View view) {
-			Bundle extras = new Bundle();
 			try {
-				((MainActivity)getActivity()).switchSelectScreen(new AlbumListFragment(),extras);
+				((MainActivity)getActivity()).switchSelectScreen(new AlbumListFragment());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -47,9 +45,8 @@ public class MenuFragment extends Fragment {
 	private OnClickListener artistListener = new OnClickListener(){
 		@Override
 		public void onClick(View view) {
-			Bundle extras = new Bundle();
 			try {
-				((MainActivity)getActivity()).switchSelectScreen(new ArtistListFragment(),extras);
+				((MainActivity)getActivity()).switchSelectScreen(new ArtistListFragment());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

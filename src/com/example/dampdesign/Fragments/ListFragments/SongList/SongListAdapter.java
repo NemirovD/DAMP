@@ -36,6 +36,7 @@ public class SongListAdapter extends BaseAdapter {
 			MediaStore.Audio.Media.DURATION};
 	
 	String orderBySong = MediaStore.Audio.Media.TITLE + " ASC";
+	String orderByTrack = MediaStore.Audio.Media.TRACK + " ASC";
 	String orderByArtist = MediaStore.Audio.Media.ARTIST + " ASC";
 	String orderByAlbum = MediaStore.Audio.Media.ALBUM +" ASC";
 	String orderByAlbumArtist = MediaStore.Audio.Media.ARTIST+" ,"+ MediaStore.Audio.Media.ALBUM;
@@ -51,7 +52,7 @@ public class SongListAdapter extends BaseAdapter {
 		this.context = context;
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, where, null,
-				orderBySong);
+				orderByTrack);
 	}
 	
 	protected Cursor getCursor(){

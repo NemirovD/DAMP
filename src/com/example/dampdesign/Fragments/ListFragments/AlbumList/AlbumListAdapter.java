@@ -24,6 +24,7 @@ public class AlbumListAdapter extends BaseAdapter{
 	String orderByAlbum = MediaStore.Audio.Albums.ALBUM +" ASC";
 	
 	String proj[] = { MediaStore.Audio.Albums.ALBUM,
+			MediaStore.Audio.Albums._ID,
 			MediaStore.Audio.Albums.ARTIST,
 			MediaStore.Audio.Albums.ALBUM_ART};
 	
@@ -37,6 +38,10 @@ public class AlbumListAdapter extends BaseAdapter{
 	public AlbumListAdapter(Context context, String where){
 		this.context = context;
 		this.cursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null, orderByAlbum);
+	}
+	
+	protected Cursor getCursor(){
+		return cursor;
 	}
 
 	@Override

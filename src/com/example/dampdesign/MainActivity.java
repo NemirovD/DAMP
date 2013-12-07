@@ -1,5 +1,7 @@
 package com.example.dampdesign;
 
+import java.util.ArrayList;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,12 +11,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.dampdesign.Fragments.MenuFragment;
 import com.example.dampdesign.Fragments.PlayerFragment;
 import com.example.dampdesign.Fragments.WelcomeFragment;
 
 public class MainActivity extends FragmentActivity {
+	
+	public static String HAS_WHERE = "haswhere";
+	public static String WHERE = "where";
+	
 	//to tell the adapter when the fragment has changed
 	boolean fragmentChanged;
 	private MenuFragment menu;
@@ -23,15 +31,22 @@ public class MainActivity extends FragmentActivity {
 	
 	private ViewPager pager;
 	private PagerAdapter pagerAdapter;
-	private DepthPageTransformer dPT;
+	
+	//personal backstack implementation
+	//specifically for fragments
+	private ArrayList<Fragment> backStack;
 	
 	//test code that's probably going to be gotten rid of
 	//or evolved into something better
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//Remove title bar
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		
 		fragmentChanged = false;
+		backStack = new ArrayList<Fragment>();
 		
 		menu = new MenuFragment();
 		player = new PlayerFragment();
@@ -39,7 +54,6 @@ public class MainActivity extends FragmentActivity {
 		
 		pager = (ViewPager) findViewById(R.id.pager);
 		pagerAdapter = new DampPagerAdapter(getSupportFragmentManager());
-		dPT =  new DepthPageTransformer();
 		pager.setAdapter(pagerAdapter);
 		pager.setCurrentItem(1);
 	}
@@ -51,21 +65,52 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 	
-	public void switchSelectScreen(Fragment frag, Bundle extras) throws Exception{
+	@Override
+	public void onBackPressed(){
+		int page = pager.getCurrentItem();
+		if(page == 0 || page == 2){
+			pager.setCurrentItem(1);
+			return;
+		}
+		
+		if(backStack.size()==1){
+			return;
+		}else{
+			backStack.remove(backStack.size()-1);
+			setSelectScreen(backStack.get(backStack.size()-1));
+		}
+	}
+	
+	public void switchSelectScreen(Fragment frag) throws Exception{
 		getSupportFragmentManager().beginTransaction().remove(selectScreen).commit();
-		selectScreen = frag;
-		fragmentChanged = true;
-		pagerAdapter.notifyDataSetChanged();
-		pager.setCurrentItem(1,true);
+		
+		if(frag.getArguments() == null){
+			resetBackStack();
+		}
+		backStack.add(frag);
+		
+		setSelectScreen(frag);
+		pager.setCurrentItem(1);
 	}
 	
 	public void playSong(int index, Cursor c){
 		player.setSong(index, c);
-		pager.setCurrentItem(2, true);
+		pager.setCurrentItem(2);
+	}
+	
+	private void setSelectScreen(Fragment frag){
+		selectScreen = frag;
+		fragmentChanged = true;
+		pagerAdapter.notifyDataSetChanged();
+	}
+	
+	private void resetBackStack(){
+		backStack.clear();
+		backStack.add(new WelcomeFragment());
 	}
 	
 	private class DampPagerAdapter extends FragmentStatePagerAdapter{
-		//class designed to allow switching to and from player fragment
+		//class designed to allow switching to and from player fragment and menu fragment
 		public DampPagerAdapter(FragmentManager fm){
 			super(fm);
 		}
@@ -93,6 +138,7 @@ public class MainActivity extends FragmentActivity {
 		}
 		
 		//if this were not here the app would crash
+		//like seriously, after a fragment switch  IT WOULD CRASH HARD
 	    @Override
 	    public int getItemPosition(Object object)
 	    {

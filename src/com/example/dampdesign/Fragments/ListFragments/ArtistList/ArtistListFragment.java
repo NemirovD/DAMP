@@ -1,16 +1,50 @@
 package com.example.dampdesign.Fragments.ListFragments.ArtistList;
 
-import com.example.dampdesign.R;
-
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.example.dampdesign.MainActivity;
+import com.example.dampdesign.R;
+import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListFragment;
+
 public class ArtistListFragment extends Fragment {
-private ArtistListAdapter ad;
+	
+	public static ArtistListFragment newInstance(Bundle extras){
+		ArtistListFragment f = new ArtistListFragment();
+		f.setArguments(extras);
+		return f;
+	}
+	
+	private ArtistListAdapter ad;
+	
+	private OnItemClickListener artistSelected = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView parent, View view, int position, long id) {
+			Bundle extras = new Bundle();
+			Cursor c = ad.getCursor();
+			c.moveToPosition(position);
+			
+			String artId = c.getString(c.getColumnIndex(MediaStore.Audio.Artists.ARTIST));
+			
+			String where = MediaStore.Audio.Artists.Albums.ARTIST + "=\"" + artId+"\"";
+			
+			extras.putBoolean(MainActivity.HAS_WHERE,true);
+			extras.putString(MainActivity.WHERE,where);
+			try {
+				((MainActivity)getActivity()).switchSelectScreen(AlbumListFragment.newInstance(extras));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState){
 		View view;
@@ -18,6 +52,7 @@ private ArtistListAdapter ad;
 		ad = new ArtistListAdapter(getActivity());
 		ListView lv = (ListView)view.findViewById(R.id.generic_list_view);
 		lv.setAdapter(ad);
+		lv.setOnItemClickListener(artistSelected);
 		
 		return view;
 	}

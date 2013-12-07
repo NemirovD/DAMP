@@ -39,6 +39,10 @@ public class ArtistListAdapter extends BaseAdapter{
 				MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null,
 				orderByArtist);
 	}
+	
+	protected Cursor getCursor(){
+		return cursor;
+	}
 
 	@Override
 	public int getCount() {
