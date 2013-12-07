@@ -1,8 +1,7 @@
 package com.example.dampdesign.Fragments.ListFragments.SongList;
 
 import java.io.File;
-
-import com.example.dampdesign.R;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +16,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dampdesign.R;
+
 public class SongListAdapter extends BaseAdapter {
 	Context context;
 	Cursor cursor;
@@ -30,7 +31,9 @@ public class SongListAdapter extends BaseAdapter {
 			MediaStore.Audio.Media.ALBUM,
 			MediaStore.Audio.Media.YEAR,
 			MediaStore.Audio.Media.TRACK,
-			MediaStore.Audio.Media.ALBUM_ID};
+			MediaStore.Audio.Media.ALBUM_ID,
+			MediaStore.Audio.Media.DATA,
+			MediaStore.Audio.Media.DURATION};
 	
 	String orderBySong = MediaStore.Audio.Media.TITLE + " ASC";
 	String orderByArtist = MediaStore.Audio.Media.ARTIST + " ASC";
@@ -49,6 +52,10 @@ public class SongListAdapter extends BaseAdapter {
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, where, null,
 				orderBySong);
+	}
+	
+	protected Cursor getCursor(){
+		return cursor;
 	}
 
 	@Override

@@ -7,20 +7,28 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:src="@drawable/grayscale_logo" />
-
+        android:src="@drawable/grayscale_logo"/>
+    
     <SeekBar
-        android:id="@+id/seekBar1"
+        android:id="@+id/player_seekBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/player_fragment_current_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+       		android:paddingLeft="15dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="" />
 
         <Button
             android:id="@+id/player_fragment_back_button"
@@ -36,7 +44,7 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:layout_margin="4dp"
-            android:background="@drawable/player_pause_button" />
+            android:background="@drawable/player_play_button" />
 
         <Button
             android:id="@+id/player_fragment_next_button"
@@ -45,6 +53,15 @@
             android:gravity="center"
             android:layout_margin="4dp"
             android:background="@drawable/player_next_button" />
+
+        <TextView
+            android:id="@+id/player_fragment_total_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="" />
 
     </LinearLayout>
 

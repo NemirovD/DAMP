@@ -1,6 +1,6 @@
 package com.example.dampdesign;
 
-import android.graphics.Point;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 
 import com.example.dampdesign.Fragments.MenuFragment;
@@ -28,14 +27,6 @@ public class MainActivity extends FragmentActivity {
 	
 	//test code that's probably going to be gotten rid of
 	//or evolved into something better
-	public void switchSelectScreen(Fragment frag, Bundle extras) throws Exception{
-		getSupportFragmentManager().beginTransaction().remove(selectScreen).commit();
-		selectScreen = frag;
-		fragmentChanged = true;
-		pagerAdapter.notifyDataSetChanged();
-		pager.setCurrentItem(1,true);
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,8 +42,6 @@ public class MainActivity extends FragmentActivity {
 		dPT =  new DepthPageTransformer();
 		pager.setAdapter(pagerAdapter);
 		pager.setCurrentItem(1);
-		pager.setPageTransformer(false,dPT);
-		pager.setPageTransformer(false, null);
 	}
 
 	@Override
@@ -60,6 +49,19 @@ public class MainActivity extends FragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void switchSelectScreen(Fragment frag, Bundle extras) throws Exception{
+		getSupportFragmentManager().beginTransaction().remove(selectScreen).commit();
+		selectScreen = frag;
+		fragmentChanged = true;
+		pagerAdapter.notifyDataSetChanged();
+		pager.setCurrentItem(1,true);
+	}
+	
+	public void playSong(int index, Cursor c){
+		player.setSong(index, c);
+		pager.setCurrentItem(2, true);
 	}
 	
 	private class DampPagerAdapter extends FragmentStatePagerAdapter{
