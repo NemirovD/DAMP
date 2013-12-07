@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#202020" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="35sp"
+        android:textColor="#DFDFDFFF"
+        android:text="@string/menu_views_title_name" />
+
+    <TextView
+        android:id="@+id/viewArtists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:text="@string/menu_views_artists_name"
+        android:textColor="#DFDFDFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/viewAlbums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:text="@string/menu_views_albums_name"
+        android:textColor="#DFDFDFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/viewSongs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:text="@string/menu_views_songs_name"
+        android:textColor="#DFDFDFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>

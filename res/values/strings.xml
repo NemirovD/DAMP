@@ -2,5 +2,10 @@
 <resources>
 
     <string name="app_name">DAMP</string>
-
+    <string name="menu_views_title_name">Views</string>
+    <string name="menu_views_sort_name">Sort By:</string>
+    <string name="menu_views_albums_name">Albums</string>
+	<string name="menu_views_artists_name">Artists</string>
+	<string name="menu_views_songs_name">Songs</string>
+	
 </resources>

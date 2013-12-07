@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dampdesign.R;
-
+//only cursor not closed is the member one
 public class AlbumListAdapter extends BaseAdapter{
 	Context context;
 	Cursor cursor;
@@ -32,6 +32,11 @@ public class AlbumListAdapter extends BaseAdapter{
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, null, null,
 				orderByAlbum);
+	}
+	
+	public AlbumListAdapter(Context context, String where){
+		this.context = context;
+		this.cursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null, orderByAlbum);
 	}
 
 	@Override
@@ -121,7 +126,7 @@ public class AlbumListAdapter extends BaseAdapter{
 					return null;
 				}
 				bitmap = BitmapFactory.decodeFile(path);
-			} catch (Exception e) {
+			} catch (Exception e){
 				bitmap = null;
 			}
 			return bitmap;

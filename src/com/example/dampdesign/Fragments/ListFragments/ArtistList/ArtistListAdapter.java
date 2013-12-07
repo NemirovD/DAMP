@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+//only cursor not closed is the member one
 public class ArtistListAdapter extends BaseAdapter{
 	Context context;
 	Cursor cursor;
@@ -30,6 +30,13 @@ public class ArtistListAdapter extends BaseAdapter{
 		this.context = context;
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, null, null,
+				orderByArtist);
+	}
+	
+	public ArtistListAdapter(Context context, String where) {
+		this.context = context;
+		this.cursor = context.getContentResolver().query(
+				MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null,
 				orderByArtist);
 	}
 

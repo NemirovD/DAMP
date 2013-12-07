@@ -43,6 +43,13 @@ public class SongListAdapter extends BaseAdapter {
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, null, null,
 				orderBySong);
 	}
+	
+	public SongListAdapter(Context context, String where) {
+		this.context = context;
+		this.cursor = context.getContentResolver().query(
+				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, where, null,
+				orderBySong);
+	}
 
 	@Override
 	public int getCount() {
