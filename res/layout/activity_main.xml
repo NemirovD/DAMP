@@ -9,7 +9,7 @@
 	    android:layout_height="50dp"
 	    android:gravity="center"
 	    android:orientation="horizontal"
-	    android:background="#64a9ff">
+	    android:background="#4266ff">
 	
 	    <TextView
 	        android:id="@+id/main_title_left"

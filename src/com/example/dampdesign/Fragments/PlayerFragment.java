@@ -1,6 +1,5 @@
 package com.example.dampdesign.Fragments;
 
-import com.example.dampdesign.R;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,7 +23,13 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.example.dampdesign.MainActivity;
+import com.example.dampdesign.R;
+
 public class PlayerFragment extends Fragment implements OnSeekBarChangeListener, OnCompletionListener {
+	//MainActivity
+	MainActivity root;
+	
 	// Underlying function members
 	MediaPlayer player;
 	AudioManager audioManager;
@@ -115,6 +120,7 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 			player = new MediaPlayer();
 			player.setOnCompletionListener(this);
 		}
+		root = (MainActivity)getActivity();
 		playerCurrentTime = (TextView) view
 				.findViewById(R.id.player_fragment_current_time);
 		playerTotalTime = (TextView) view
@@ -165,6 +171,17 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 				String albumId = c.getString(c
 						.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
 				(new ImageLoader()).execute(albumId,artView);
+				
+				ImageView titleArt = (ImageView) root.title.findViewById(R.id.title_songscreen_album_art);
+				TextView song =  (TextView) root.title.findViewById(R.id.title_songscreen_text_1);
+				TextView artist = (TextView) root.title.findViewById(R.id.title_songscreen_text_2);
+				
+				song.setText(c.getString(c.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+				artist.setText(c.getString(c.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+				(new ImageLoader()).execute(albumId,titleArt);
+				
+				root.song = song.getText().toString();
+				root.artist = artist.getText().toString();
 			} catch (Exception e) {
 				return;
 			}
@@ -258,6 +275,7 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 			}else{
 		      imageView.setImageBitmap(result);
 			}
+			root.titleArt = imageView.getDrawable();
 		}
 	}
 }

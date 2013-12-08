@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/song_list_item_layout"
-    android:layout_width="fill_parent"
-    android:layout_height="80dp"
-    android:orientation="horizontal" >
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="#4266ff" >
     
     <ImageView 
-        android:id="@+id/song_list_item_album_art"
+        android:id="@+id/title_songscreen_album_art"
         android:layout_width="60dp"
-        android:layout_height="60dp"/>
+        android:layout_height="60dp"
+        android:src="@drawable/grayscale_logo"
+        android:background="#FFFFFF"/>
 
     <TwoLineListItem
         android:layout_width="fill_parent"
         android:layout_height="match_parent" >
 
         <TextView
-            android:id="@+id/song_list_item_text_1"
+            android:id="@+id/title_songscreen_text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dip"
+            android:layout_marginTop="4dp"
             android:paddingLeft="20dp"
+            android:text="@string/songscreen_text_big"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
+            android:textColor="#DFDFDF"
             android:singleLine="true"
             android:ellipsize="marquee"
         	android:marqueeRepeatLimit ="marquee_forever"
         	android:scrollHorizontally="true" />
 
         <TextView
-            android:id="@+id/song_list_item_text_2"
+            android:id="@+id/title_songscreen_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignStart="@id/song_list_item_text_1"
-            android:layout_below="@id/song_list_item_text_1"
+            android:layout_alignStart="@id/title_songscreen_text_1"
+            android:layout_below="@id/title_songscreen_text_1"
             android:paddingLeft="20dp"
+            android:text="@string/songscreen_text_small"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#000000"
+            android:textColor="#DFDFDF"
             android:singleLine="true"
             android:ellipsize="marquee"
         	android:marqueeRepeatLimit ="marquee_forever"

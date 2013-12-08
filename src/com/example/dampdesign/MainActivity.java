@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dampdesign.Fragments.MenuFragment;
@@ -27,12 +30,19 @@ public class MainActivity extends FragmentActivity {
 	public static String WHERE = "where";
 	
 	//to tell the adapter when the fragment has changed
+	String tester;
 	boolean fragmentChanged;
 	private MenuFragment menu;
 	private PlayerFragment player;
 	private Fragment selectScreen;
+	
 	private TextView leftTitle;
 	private TextView rightTitle;
+	public LinearLayout title;
+	
+	public String song;
+	public String artist;
+	public Drawable titleArt;
 	
 	private ViewPager pager;
 	private PagerAdapter pagerAdapter;
@@ -67,6 +77,7 @@ public class MainActivity extends FragmentActivity {
 		}
 		@Override
 		public void onPageSelected(int position) {
+			/*
 			if(position == 0){
 				leftTitle.setText("");
 				leftTitle.setClickable(false);
@@ -81,6 +92,36 @@ public class MainActivity extends FragmentActivity {
 			}else{
 				rightTitle.setText(viewNames[position+1]);
 				rightTitle.setClickable(true);
+			}*/
+			
+			switch(position){
+			case 0:
+				title.setVisibility(View.GONE);
+				return;
+			case 1:
+				title.setVisibility(View.VISIBLE);
+				title.removeAllViews();
+				title = (LinearLayout) getLayoutInflater().inflate(R.layout.title_mainscreen, title);
+				leftTitle = (TextView) title.findViewById(R.id.main_title_left);
+				leftTitle.setOnClickListener(leftClick);
+				rightTitle = (TextView) title.findViewById(R.id.main_title_right);
+				rightTitle.setOnClickListener(rightClick);
+				tester = "not works";
+				return;
+			case 2:
+				title.removeAllViews();
+				title = (LinearLayout) getLayoutInflater().inflate(R.layout.title_songscreen, title);
+				if(song!=null&&artist!=null){
+					TextView songtv = (TextView) findViewById(R.id.title_songscreen_text_1);
+					TextView artisttv = (TextView) findViewById(R.id.title_songscreen_text_2);
+					songtv.setText(song);
+					artisttv.setText(artist);
+				}
+				if(titleArt!=null){
+					ImageView titleArtiv = (ImageView) findViewById(R.id.title_songscreen_album_art);
+					titleArtiv.setImageDrawable(titleArt);
+				}
+				return;
 			}
 		}
 	};
@@ -104,6 +145,8 @@ public class MainActivity extends FragmentActivity {
 		leftTitle.setOnClickListener(leftClick);
 		rightTitle = (TextView) findViewById(R.id.main_title_right);
 		rightTitle.setOnClickListener(rightClick);
+		
+		title = (LinearLayout)findViewById(R.id.main_title_layout);
 		
 		pager = (ViewPager) findViewById(R.id.pager);
 		pagerAdapter = new DampPagerAdapter(getSupportFragmentManager());
@@ -152,8 +195,8 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	public void playSong(int index, Cursor c){
-		player.setSong(index, c);
 		pager.setCurrentItem(2);
+		player.setSong(index, c);
 	}
 	
 	private void setSelectScreen(Fragment frag){
