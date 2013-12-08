@@ -1,8 +1,6 @@
 package com.example.dampdesign.Fragments.ListFragments.SongList;
 
 import java.io.File;
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -81,7 +79,7 @@ public class SongListAdapter extends BaseAdapter {
 
 		if (convertView == null) {
 			LayoutInflater in = (LayoutInflater) context
-					.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = in.inflate(R.layout.song_list_item, null);
 
 			ImageView img = (ImageView) v
@@ -166,7 +164,6 @@ public class SongListAdapter extends BaseAdapter {
 				return;
 			}
 			if(result == null){
-				imageView.setImageResource(R.drawable.grayscale_logo);
 			}else{
 		      imageView.setImageBitmap(result);
 			}

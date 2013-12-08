@@ -18,7 +18,7 @@ public class SongListFragment extends Fragment {
 	private SongListAdapter ad;
 	private OnItemClickListener songSelected = new OnItemClickListener(){
 		@Override
-		public void onItemClick(AdapterView parent, View view, int position,
+		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Cursor c = ad.getCursor();
 			((MainActivity)getActivity()).playSong(position, c);

@@ -2,6 +2,7 @@ package com.example.dampdesign;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,16 +11,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.dampdesign.Fragments.MenuFragment;
 import com.example.dampdesign.Fragments.PlayerFragment;
 import com.example.dampdesign.Fragments.WelcomeFragment;
 
 public class MainActivity extends FragmentActivity {
-	
 	public static String HAS_WHERE = "haswhere";
 	public static String WHERE = "where";
 	
@@ -28,6 +31,8 @@ public class MainActivity extends FragmentActivity {
 	private MenuFragment menu;
 	private PlayerFragment player;
 	private Fragment selectScreen;
+	private TextView leftTitle;
+	private TextView rightTitle;
 	
 	private ViewPager pager;
 	private PagerAdapter pagerAdapter;
@@ -36,26 +41,75 @@ public class MainActivity extends FragmentActivity {
 	//specifically for fragments
 	private ArrayList<Fragment> backStack;
 	
-	//test code that's probably going to be gotten rid of
-	//or evolved into something better
+	OnClickListener leftClick = new OnClickListener(){
+		@Override
+		public void onClick(View arg0) {
+			if(pager.getCurrentItem() > 0)
+			pager.setCurrentItem(pager.getCurrentItem()-1);
+		}
+	};
+	
+	OnClickListener rightClick = new OnClickListener(){
+		@Override
+		public void onClick(View arg0) {
+			if(pager.getCurrentItem() < pagerAdapter.getCount())
+				pager.setCurrentItem(pager.getCurrentItem()+1);
+		}
+	};
+	
+	OnPageChangeListener pageListener = new OnPageChangeListener(){
+		private String[] viewNames = {"Menu","Songs","Player"};
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+		}
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {	
+		}
+		@Override
+		public void onPageSelected(int position) {
+			if(position == 0){
+				leftTitle.setText("");
+				leftTitle.setClickable(false);
+			}else{
+				leftTitle.setText(viewNames[position-1]);
+				leftTitle.setClickable(true);
+			}
+			
+			if(position == (viewNames.length-1)){
+				rightTitle.setText("");
+				rightTitle.setClickable(false);
+			}else{
+				rightTitle.setText(viewNames[position+1]);
+				rightTitle.setClickable(true);
+			}
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		
 		fragmentChanged = false;
 		backStack = new ArrayList<Fragment>();
+		resetBackStack();
 		
 		menu = new MenuFragment();
 		player = new PlayerFragment();
 		selectScreen = new WelcomeFragment();
 		
+		leftTitle = (TextView) findViewById(R.id.main_title_left);
+		leftTitle.setOnClickListener(leftClick);
+		rightTitle = (TextView) findViewById(R.id.main_title_right);
+		rightTitle.setOnClickListener(rightClick);
+		
 		pager = (ViewPager) findViewById(R.id.pager);
 		pagerAdapter = new DampPagerAdapter(getSupportFragmentManager());
 		pager.setAdapter(pagerAdapter);
 		pager.setCurrentItem(1);
+		pager.setOnPageChangeListener(pageListener);
 	}
 
 	@Override
@@ -74,7 +128,10 @@ public class MainActivity extends FragmentActivity {
 		}
 		
 		if(backStack.size()==1){
-			return;
+			Intent setIntent = new Intent(Intent.ACTION_MAIN);
+			setIntent.addCategory(Intent.CATEGORY_HOME);
+			setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(setIntent);
 		}else{
 			backStack.remove(backStack.size()-1);
 			setSelectScreen(backStack.get(backStack.size()-1));

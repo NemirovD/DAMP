@@ -27,7 +27,7 @@ public class ArtistListFragment extends Fragment {
 	
 	private OnItemClickListener artistSelected = new OnItemClickListener(){
 		@Override
-		public void onItemClick(AdapterView parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Bundle extras = new Bundle();
 			Cursor c = ad.getCursor();
 			c.moveToPosition(position);

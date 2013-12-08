@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.example.dampdesign.MainActivity;
 import com.example.dampdesign.R;
-import com.example.dampdesign.Fragments.ListFragments.SongList.SongListAdapter;
 import com.example.dampdesign.Fragments.ListFragments.SongList.SongListFragment;
 
 public class AlbumListFragment extends Fragment {
@@ -22,7 +21,7 @@ public class AlbumListFragment extends Fragment {
 	
 	private OnItemClickListener albumSelected = new OnItemClickListener(){
 		@Override
-		public void onItemClick(AdapterView parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			
 			Bundle extras = new Bundle();
 			Cursor c = ad.getCursor();

@@ -16,5 +16,14 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="DampTitleBackground">
+        <item name="android:background">#59ACFF</item>
+    </style>
+    
+    <style name="DampTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowTitleSize">50dp</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
 
 </resources>

@@ -66,7 +66,7 @@ public class AlbumListAdapter extends BaseAdapter{
 
 		if (convertView == null) {
 			LayoutInflater in = (LayoutInflater) context
-					.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = in.inflate(R.layout.song_list_item, null);
 
 			ImageView img = (ImageView) v

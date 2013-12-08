@@ -7,5 +7,8 @@
     <string name="menu_views_albums_name">Albums</string>
 	<string name="menu_views_artists_name">Artists</string>
 	<string name="menu_views_songs_name">Songs</string>
+	<string name="mainscreen_title_left">Menu</string>
+	<string name="mainscreen_title_right">Player</string>
+	<string name="menuscreen_title_right">Close</string>
 	
 </resources>
