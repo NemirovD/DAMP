@@ -110,6 +110,7 @@ public class MainActivity extends FragmentActivity {
 		pager.setAdapter(pagerAdapter);
 		pager.setCurrentItem(1);
 		pager.setOnPageChangeListener(pageListener);
+		pager.setPageTransformer(false, new ZoomOutPageTransformer());
 	}
 
 	@Override
