@@ -109,6 +109,7 @@ public class MainActivity extends FragmentActivity {
 				tester = "not works";
 				return;
 			case 2:
+				title.setVisibility(View.VISIBLE);
 				title.removeAllViews();
 				title = (LinearLayout) getLayoutInflater().inflate(R.layout.title_songscreen, title);
 				if(song!=null&&artist!=null){

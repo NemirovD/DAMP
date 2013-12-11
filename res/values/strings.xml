@@ -11,5 +11,7 @@
 	<string name="mainscreen_title_right">Player</string>
 	<string name="songscreen_text_big">Song</string>
 	<string name="songscreen_text_small">Artist</string>
+	<string name="welcome_text_1">Swipe to the left to see the menu and start browsing songs.</string>
+	<string name="welcome_text_2">Swipe to the right from this screen to see the player at any time.</string>
 	
 </resources>

@@ -30,8 +30,9 @@ public final class R {
         public static final int player_play_button=0x7f020006;
     }
     public static final class id {
+        public static final int RelativeLayout1=0x7f080017;
         public static final int generic_list_view=0x7f080004;
-        public static final int imageView1=0x7f080017;
+        public static final int imageView1=0x7f080018;
         public static final int main_title_layout=0x7f080000;
         public static final int main_title_left=0x7f080001;
         public static final int main_title_right=0x7f080002;
@@ -54,6 +55,10 @@ public final class R {
         public static final int viewAlbums=0x7f080007;
         public static final int viewArtists=0x7f080006;
         public static final int viewSongs=0x7f080008;
+        public static final int welcome_arrow_left=0x7f080019;
+        public static final int welcome_arrow_right=0x7f08001c;
+        public static final int welcome_text_1=0x7f08001a;
+        public static final int welcome_text_2=0x7f08001b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -79,6 +84,8 @@ public final class R {
         public static final int menu_views_title_name=0x7f050001;
         public static final int songscreen_text_big=0x7f050008;
         public static final int songscreen_text_small=0x7f050009;
+        public static final int welcome_text_1=0x7f05000a;
+        public static final int welcome_text_2=0x7f05000b;
     }
     public static final class style {
         /** 
