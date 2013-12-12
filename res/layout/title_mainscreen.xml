@@ -18,6 +18,18 @@
         android:textColor="#DFDFDF"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:clickable="true" />
+    
+    <TextView
+        android:id="@+id/main_title_center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="@string/mainscreen_title_center"
+        android:textColor="#DFDFDF"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="true" />
 
     <TextView
         android:id="@+id/main_title_right"

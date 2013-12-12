@@ -3,7 +3,6 @@ package com.example.dampdesign.Fragments.ListFragments.ArtistList;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,11 @@ import android.widget.ListView;
 
 import com.example.dampdesign.MainActivity;
 import com.example.dampdesign.R;
+import com.example.dampdesign.SortListDialog;
+import com.example.dampdesign.Fragments.MainScreenFragment;
 import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListFragment;
 
-public class ArtistListFragment extends Fragment {
+public class ArtistListFragment extends MainScreenFragment {
 	
 	public static ArtistListFragment newInstance(Bundle extras){
 		ArtistListFragment f = new ArtistListFragment();
@@ -46,7 +47,7 @@ public class ArtistListFragment extends Fragment {
 		}
 	};
 	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState){
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view;
 		view = inflater.inflate(R.layout.damp_generic_list_layout, container, false);
 		ad = new ArtistListAdapter(getActivity());
@@ -55,6 +56,16 @@ public class ArtistListFragment extends Fragment {
 		lv.setOnItemClickListener(artistSelected);
 		
 		return view;
+	}
+
+	@Override
+	public SortListDialog getSortDialog() {
+		return null;
+	}
+
+	@Override
+	public void sort(int sm) {
+		//TODO
 	}
 
 }

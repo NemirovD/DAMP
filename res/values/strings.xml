@@ -8,10 +8,32 @@
 	<string name="menu_views_artists_name">Artists</string>
 	<string name="menu_views_songs_name">Songs</string>
 	<string name="mainscreen_title_left">Menu</string>
+	<string name="mainscreen_title_center">Sort</string>
 	<string name="mainscreen_title_right">Player</string>
 	<string name="songscreen_text_big">Song</string>
 	<string name="songscreen_text_small">Artist</string>
 	<string name="welcome_text_1">Swipe to the left to see the menu and start browsing songs.</string>
 	<string name="welcome_text_2">Swipe to the right from this screen to see the player at any time.</string>
+	
+	<string-array name="sort_list">
+	    <item >Title</item>
+	    <item >Album</item>
+	    <item >Artist</item>
+	    <item >Album by Artist</item>
+	    <item >Album by Artist/Year</item>
+	</string-array>
+	
+	<string-array name="songs_sort">
+	    <item >Title</item>
+	    <item >Track</item>
+	    <item >Album</item>
+	    <item >Artist</item>
+	    <item >Album by Artist</item>
+	</string-array>
+	
+	<string-array name="albums_sort">
+	    <item >Album</item>
+	    <item >Artist</item>
+	</string-array>
 	
 </resources>

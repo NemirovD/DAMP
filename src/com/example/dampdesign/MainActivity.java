@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dampdesign.Fragments.MainScreenFragment;
 import com.example.dampdesign.Fragments.MenuFragment;
 import com.example.dampdesign.Fragments.PlayerFragment;
 import com.example.dampdesign.Fragments.WelcomeFragment;
@@ -30,14 +31,15 @@ public class MainActivity extends FragmentActivity {
 	public static String WHERE = "where";
 	
 	//to tell the adapter when the fragment has changed
-	String tester;
 	boolean fragmentChanged;
 	private MenuFragment menu;
 	private PlayerFragment player;
-	private Fragment selectScreen;
+	private MainScreenFragment selectScreen;
+	private SortListDialog sortDialog;
 	
 	private TextView leftTitle;
 	private TextView rightTitle;
+	private TextView centerTitle;
 	public LinearLayout title;
 	
 	public String song;
@@ -49,13 +51,20 @@ public class MainActivity extends FragmentActivity {
 	
 	//personal backstack implementation
 	//specifically for fragments
-	private ArrayList<Fragment> backStack;
+	private ArrayList<MainScreenFragment> backStack;
 	
 	OnClickListener leftClick = new OnClickListener(){
 		@Override
 		public void onClick(View arg0) {
 			if(pager.getCurrentItem() > 0)
 			pager.setCurrentItem(pager.getCurrentItem()-1);
+		}
+	};
+	
+	OnClickListener centerClick = new OnClickListener(){
+		@Override
+		public void onClick(View view) {
+			sortDialog.show(getSupportFragmentManager(), "");
 		}
 	};
 	
@@ -68,7 +77,6 @@ public class MainActivity extends FragmentActivity {
 	};
 	
 	OnPageChangeListener pageListener = new OnPageChangeListener(){
-		private String[] viewNames = {"Menu","Songs","Player"};
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 		}
@@ -77,23 +85,6 @@ public class MainActivity extends FragmentActivity {
 		}
 		@Override
 		public void onPageSelected(int position) {
-			/*
-			if(position == 0){
-				leftTitle.setText("");
-				leftTitle.setClickable(false);
-			}else{
-				leftTitle.setText(viewNames[position-1]);
-				leftTitle.setClickable(true);
-			}
-			
-			if(position == (viewNames.length-1)){
-				rightTitle.setText("");
-				rightTitle.setClickable(false);
-			}else{
-				rightTitle.setText(viewNames[position+1]);
-				rightTitle.setClickable(true);
-			}*/
-			
 			switch(position){
 			case 0:
 				title.setVisibility(View.GONE);
@@ -102,11 +93,7 @@ public class MainActivity extends FragmentActivity {
 				title.setVisibility(View.VISIBLE);
 				title.removeAllViews();
 				title = (LinearLayout) getLayoutInflater().inflate(R.layout.title_mainscreen, title);
-				leftTitle = (TextView) title.findViewById(R.id.main_title_left);
-				leftTitle.setOnClickListener(leftClick);
-				rightTitle = (TextView) title.findViewById(R.id.main_title_right);
-				rightTitle.setOnClickListener(rightClick);
-				tester = "not works";
+				setButtonsAndListeners();
 				return;
 			case 2:
 				title.setVisibility(View.VISIBLE);
@@ -135,19 +122,16 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		
 		fragmentChanged = false;
-		backStack = new ArrayList<Fragment>();
+		backStack = new ArrayList<MainScreenFragment>();
 		resetBackStack();
 		
 		menu = new MenuFragment();
 		player = new PlayerFragment();
 		selectScreen = new WelcomeFragment();
 		
-		leftTitle = (TextView) findViewById(R.id.main_title_left);
-		leftTitle.setOnClickListener(leftClick);
-		rightTitle = (TextView) findViewById(R.id.main_title_right);
-		rightTitle.setOnClickListener(rightClick);
-		
 		title = (LinearLayout)findViewById(R.id.main_title_layout);
+		
+		setButtonsAndListeners();
 		
 		pager = (ViewPager) findViewById(R.id.pager);
 		pagerAdapter = new DampPagerAdapter(getSupportFragmentManager());
@@ -179,11 +163,18 @@ public class MainActivity extends FragmentActivity {
 			startActivity(setIntent);
 		}else{
 			backStack.remove(backStack.size()-1);
-			setSelectScreen(backStack.get(backStack.size()-1));
+			MainScreenFragment s = backStack.get(backStack.size()-1);
+			sortDialog = s.getSortDialog();
+			if(sortDialog == null){
+				centerTitle.setVisibility(View.GONE);
+			}else{
+				centerTitle.setVisibility(View.VISIBLE);
+			}
+			setSelectScreen(s);
 		}
 	}
 	
-	public void switchSelectScreen(Fragment frag) throws Exception{
+	public void switchSelectScreen(MainScreenFragment frag) throws Exception{
 		getSupportFragmentManager().beginTransaction().remove(selectScreen).commit();
 		
 		if(frag.getArguments() == null){
@@ -195,20 +186,39 @@ public class MainActivity extends FragmentActivity {
 		pager.setCurrentItem(1);
 	}
 	
-	public void playSong(int index, Cursor c){
-		pager.setCurrentItem(2);
-		player.setSong(index, c);
-	}
-	
-	private void setSelectScreen(Fragment frag){
+	private void setSelectScreen(MainScreenFragment frag){
 		selectScreen = frag;
 		fragmentChanged = true;
 		pagerAdapter.notifyDataSetChanged();
 	}
 	
+	public void selectScreenSort(int sm){
+		selectScreen.sort(sm);
+	}
+	
+	
+	public void playSong(int index, Cursor c){
+		pager.setCurrentItem(2);
+		player.setSong(index, c);
+	}
+	
 	private void resetBackStack(){
 		backStack.clear();
 		backStack.add(new WelcomeFragment());
+	}
+	
+	private void setButtonsAndListeners(){
+		leftTitle = (TextView) findViewById(R.id.main_title_left);
+		leftTitle.setOnClickListener(leftClick);
+		centerTitle = (TextView) findViewById(R.id.main_title_center);
+		centerTitle.setOnClickListener(centerClick);
+		rightTitle = (TextView) findViewById(R.id.main_title_right);
+		rightTitle.setOnClickListener(rightClick);
+		sortDialog = selectScreen.getSortDialog();
+		if(sortDialog == null){
+			centerTitle.setVisibility(View.GONE);
+		}
+		
 	}
 	
 	private class DampPagerAdapter extends FragmentStatePagerAdapter{

@@ -21,7 +21,8 @@ public class AlbumListAdapter extends BaseAdapter{
 	Context context;
 	Cursor cursor;
 	
-	String orderByAlbum = MediaStore.Audio.Albums.ALBUM +" ASC";
+	String[] orders = {MediaStore.Audio.Albums.ALBUM +" ASC",
+			MediaStore.Audio.Albums.ARTIST +" ASC"};
 	
 	String proj[] = { MediaStore.Audio.Albums.ALBUM,
 			MediaStore.Audio.Albums._ID,
@@ -32,12 +33,17 @@ public class AlbumListAdapter extends BaseAdapter{
 		this.context = context;
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, null, null,
-				orderByAlbum);
+				orders[0]);
 	}
 	
 	public AlbumListAdapter(Context context, String where){
 		this.context = context;
-		this.cursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null, orderByAlbum);
+		this.cursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null, orders[0]);
+	}
+	
+	public AlbumListAdapter(Context context, String where, int order){
+		this.context = context;
+		this.cursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj, where, null, orders[order]);
 	}
 	
 	protected Cursor getCursor(){

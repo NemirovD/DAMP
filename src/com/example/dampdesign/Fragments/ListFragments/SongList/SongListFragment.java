@@ -2,7 +2,6 @@ package com.example.dampdesign.Fragments.ListFragments.SongList;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,15 @@ import android.widget.ListView;
 
 import com.example.dampdesign.MainActivity;
 import com.example.dampdesign.R;
+import com.example.dampdesign.SortListDialog;
+import com.example.dampdesign.Fragments.MainScreenFragment;
+import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListAdapter;
 
-public class SongListFragment extends Fragment {
+public class SongListFragment extends MainScreenFragment {
 	private SongListAdapter ad;
+	private ListView lv;
+	private String where;
+	
 	private OnItemClickListener songSelected = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -39,8 +44,7 @@ public class SongListFragment extends Fragment {
 		if(extras!=null){
 			boolean hasWhere = extras.getBoolean(MainActivity.HAS_WHERE, false);
 			if(hasWhere){
-				String where = extras.getString(MainActivity.WHERE);
-				Log.d("xxx", where);
+				where = extras.getString(MainActivity.WHERE);
 				ad = new SongListAdapter(getActivity(),where);
 			}else{
 				ad = new SongListAdapter(getActivity());
@@ -49,10 +53,23 @@ public class SongListFragment extends Fragment {
 			ad = new SongListAdapter(getActivity());
 		}
 		
-		ListView lv = (ListView)view.findViewById(R.id.generic_list_view);
+		lv = (ListView)view.findViewById(R.id.generic_list_view);
 		lv.setAdapter(ad);
 		lv.setOnItemClickListener(songSelected);
 		
 		return view;
+	}
+
+	@Override
+	public SortListDialog getSortDialog() {
+		SortListDialog ret = new SortListDialog();
+		ret.setSortMethod(R.array.songs_sort);
+		return ret;
+	}
+
+	@Override
+	public void sort(int sm) {
+		ad = new SongListAdapter(getActivity(),where,sm);
+		lv.setAdapter(ad);
 	}
 }

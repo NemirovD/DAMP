@@ -3,7 +3,6 @@ package com.example.dampdesign.Fragments.ListFragments.AlbumList;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +13,14 @@ import android.widget.ListView;
 
 import com.example.dampdesign.MainActivity;
 import com.example.dampdesign.R;
+import com.example.dampdesign.SortListDialog;
+import com.example.dampdesign.Fragments.MainScreenFragment;
 import com.example.dampdesign.Fragments.ListFragments.SongList.SongListFragment;
 
-public class AlbumListFragment extends Fragment {
+public class AlbumListFragment extends MainScreenFragment {
 	private AlbumListAdapter ad;
+	private ListView lv;
+	private String where;
 	
 	private OnItemClickListener albumSelected = new OnItemClickListener(){
 		@Override
@@ -53,8 +56,7 @@ public class AlbumListFragment extends Fragment {
 		if(extras!=null){
 			boolean hasWhere = extras.getBoolean(MainActivity.HAS_WHERE, false);
 			if(hasWhere){
-				String where = extras.getString(MainActivity.WHERE);
-				Log.d("xxx", where);
+				where = extras.getString(MainActivity.WHERE);
 				ad = new AlbumListAdapter(getActivity(),where);
 			}else{
 				ad = new AlbumListAdapter(getActivity());
@@ -63,11 +65,24 @@ public class AlbumListFragment extends Fragment {
 			ad = new AlbumListAdapter(getActivity());
 		}
 		
-		ListView lv = (ListView)view.findViewById(R.id.generic_list_view);
+		lv = (ListView)view.findViewById(R.id.generic_list_view);
 		lv.setAdapter(ad);
 		lv.setOnItemClickListener(albumSelected);
 		
 		return view;
+	}
+
+	@Override
+	public SortListDialog getSortDialog() {
+		SortListDialog ret = new SortListDialog();
+		ret.setSortMethod(R.array.albums_sort);
+		return ret;
+	}
+
+	@Override
+	public void sort(int sm) {
+		ad = new AlbumListAdapter(getActivity(),where,sm);
+		lv.setAdapter(ad);
 	}
 
 }

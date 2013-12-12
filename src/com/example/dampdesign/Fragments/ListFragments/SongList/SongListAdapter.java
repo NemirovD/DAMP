@@ -33,24 +33,40 @@ public class SongListAdapter extends BaseAdapter {
 			MediaStore.Audio.Media.DATA,
 			MediaStore.Audio.Media.DURATION};
 	
+	/* no longer used changed into orders[]
 	String orderBySong = MediaStore.Audio.Media.TITLE + " ASC";
 	String orderByTrack = MediaStore.Audio.Media.TRACK + " ASC";
-	String orderByArtist = MediaStore.Audio.Media.ARTIST + " ASC";
 	String orderByAlbum = MediaStore.Audio.Media.ALBUM +" ASC";
+	String orderByArtist = MediaStore.Audio.Media.ARTIST + " ASC";
 	String orderByAlbumArtist = MediaStore.Audio.Media.ARTIST+" ,"+ MediaStore.Audio.Media.ALBUM;
+	*/
+	String[] orders = {MediaStore.Audio.Media.TITLE + " ASC",
+			MediaStore.Audio.Media.TRACK + " ASC",
+			MediaStore.Audio.Media.ALBUM +" ASC",
+			MediaStore.Audio.Media.ARTIST + " ASC",
+			MediaStore.Audio.Media.ARTIST+" ,"+ MediaStore.Audio.Media.ALBUM+ " ,"+ MediaStore.Audio.Media.YEAR
+			+ " ," + MediaStore.Audio.Media.TRACK
+			};
 
 	public SongListAdapter(Context context) {
 		this.context = context;
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, null, null,
-				orderBySong);
+				orders[0]);
 	}
 	
 	public SongListAdapter(Context context, String where) {
 		this.context = context;
 		this.cursor = context.getContentResolver().query(
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, where, null,
-				orderByTrack);
+				orders[1]);
+	}
+	
+	public SongListAdapter(Context context, String where, int order) {
+		this.context = context;
+		this.cursor = context.getContentResolver().query(
+				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj, where, null,
+				orders[order]);
 	}
 	
 	protected Cursor getCursor(){
