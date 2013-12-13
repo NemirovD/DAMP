@@ -14,7 +14,8 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@style/DampTheme" >
+        android:theme="@style/DampTheme"
+        android:launchMode="singleInstance" >
         <activity
             android:name="ca.nemirovd.damp.MainActivity"
             android:label="@string/app_name" 

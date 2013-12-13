@@ -165,6 +165,12 @@ public class MainActivity extends FragmentActivity {
 		pager.setOnPageChangeListener(pageListener);
 		pager.setPageTransformer(false, new ZoomOutPageTransformer());
 	}
+	
+	@Override
+	protected void onPause(){
+		//new DampNotification(this);
+		super.onPause();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
