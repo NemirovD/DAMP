@@ -1,4 +1,4 @@
-package com.example.dampdesign.Fragments.ListFragments.SongList;
+package ca.nemirovd.damp.Fragments.ListFragments.SongList;
 
 import java.io.File;
 import android.content.Context;
@@ -14,15 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dampdesign.R;
+import ca.nemirovd.damp.R;
 
 public class SongListAdapter extends BaseAdapter {
 	Context context;
 	Cursor cursor;
-	
-	public static enum SortBy{
-		SONGNAME,ALBUM,ARTIST,ALBUMARTIST,ALBUMARTISTYEAR
-	}
 
 	String proj[] = { MediaStore.Audio.Media.TITLE,
 			MediaStore.Audio.Media.ARTIST,

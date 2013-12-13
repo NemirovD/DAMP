@@ -1,4 +1,4 @@
-package com.example.dampdesign;
+package ca.nemirovd.damp;
 
 import android.view.View;
 import android.support.v4.view.ViewPager;

@@ -1,8 +1,8 @@
-package com.example.dampdesign.Fragments.ListFragments.ArtistList;
+package ca.nemirovd.damp.Fragments.ListFragments.ArtistList;
 
 import java.io.File;
 
-import com.example.dampdesign.R;
+import ca.nemirovd.damp.R;
 
 import android.content.Context;
 import android.database.Cursor;

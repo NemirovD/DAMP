@@ -1,4 +1,4 @@
-package com.example.dampdesign.Fragments;
+package ca.nemirovd.damp.Fragments;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -17,14 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-
-import com.example.dampdesign.MainActivity;
-import com.example.dampdesign.R;
+import ca.nemirovd.damp.MainActivity;
+import ca.nemirovd.damp.R;
 
 public class PlayerFragment extends Fragment implements OnSeekBarChangeListener, OnCompletionListener {
 	//MainActivity
@@ -36,7 +39,11 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 	Cursor queue;
 	boolean isPlayerSet;
 
-	// UI members
+	// UI members'
+	FrameLayout centerStage;
+	ImageView stageArt;
+	ListView stageQueue;
+	PlayerQueueAdapter stageQueueAdapter;
 	ImageView artView;
 	SeekBar seekBar;
 	Button playerBackButton;
@@ -88,6 +95,13 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 			}
 		}
 	};
+	private OnItemClickListener songSelected = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			((MainActivity)getActivity()).playSong(position, queue);
+		}
+	};
 	
 	private OnAudioFocusChangeListener afListener = new OnAudioFocusChangeListener(){
 		private float volume;
@@ -121,6 +135,11 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 			player.setOnCompletionListener(this);
 		}
 		root = (MainActivity)getActivity();
+		
+		centerStage = (FrameLayout) view.findViewById(R.id.player_centerstage);
+		stageArt = (ImageView)view.findViewById(R.id.player_image);
+		stageQueue = new ListView(getActivity());
+		
 		playerCurrentTime = (TextView) view
 				.findViewById(R.id.player_fragment_current_time);
 		playerTotalTime = (TextView) view
@@ -147,6 +166,10 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 		int result = audioManager.requestAudioFocus(afListener,
 				AudioManager.STREAM_MUSIC,
 				AudioManager.AUDIOFOCUS_GAIN);
+		
+		stageQueueAdapter = new PlayerQueueAdapter(root,c);
+		stageQueue.setAdapter(stageQueueAdapter);
+		stageQueue.setOnItemClickListener(songSelected);
 
 		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 			try {
@@ -186,6 +209,16 @@ public class PlayerFragment extends Fragment implements OnSeekBarChangeListener,
 				return;
 			}
 		}
+	}
+	
+	public void showQueue(){
+		centerStage.removeAllViews();
+		centerStage.addView(stageQueue);
+	}
+	
+	public void showImage(){
+		centerStage.removeAllViews();
+		centerStage.addView(stageArt);
 	}
 
 	private String convertTime(long millis) {

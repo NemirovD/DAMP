@@ -1,4 +1,4 @@
-package com.example.dampdesign.Fragments.ListFragments.AlbumList;
+package ca.nemirovd.damp.Fragments.ListFragments.AlbumList;
 
 import java.io.File;
 
@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dampdesign.R;
+import ca.nemirovd.damp.R;
 //only cursor not closed is the member one
 public class AlbumListAdapter extends BaseAdapter{
 	Context context;

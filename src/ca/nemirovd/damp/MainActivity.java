@@ -1,6 +1,7 @@
-package com.example.dampdesign;
+package ca.nemirovd.damp;
 
 import java.util.ArrayList;
+
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,15 +22,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.dampdesign.Fragments.MainScreenFragment;
-import com.example.dampdesign.Fragments.MenuFragment;
-import com.example.dampdesign.Fragments.PlayerFragment;
-import com.example.dampdesign.Fragments.WelcomeFragment;
+import ca.nemirovd.damp.Fragments.MainScreenFragment;
+import ca.nemirovd.damp.Fragments.MenuFragment;
+import ca.nemirovd.damp.Fragments.PlayerFragment;
+import ca.nemirovd.damp.Fragments.WelcomeFragment;
+
+import ca.nemirovd.damp.R;
 
 public class MainActivity extends FragmentActivity {
 	public static String HAS_WHERE = "haswhere";
 	public static String WHERE = "where";
 	
+	
+	boolean isShowingQueue;
 	//to tell the adapter when the fragment has changed
 	boolean fragmentChanged;
 	private MenuFragment menu;
@@ -76,6 +81,21 @@ public class MainActivity extends FragmentActivity {
 		}
 	};
 	
+	OnClickListener imgQueueListener = new OnClickListener(){
+		@Override
+		public void onClick(View view) {
+			ImageView img = (ImageView)view;
+			if(isShowingQueue){
+				img.setImageResource(R.drawable.player_queue);
+				player.showImage();
+			}else{
+				img.setImageResource(R.drawable.player_image);
+				player.showQueue();
+			}
+			isShowingQueue = !isShowingQueue;
+		}
+	};
+	
 	OnPageChangeListener pageListener = new OnPageChangeListener(){
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
@@ -109,6 +129,10 @@ public class MainActivity extends FragmentActivity {
 					ImageView titleArtiv = (ImageView) findViewById(R.id.title_songscreen_album_art);
 					titleArtiv.setImageDrawable(titleArt);
 				}
+				ImageView imgqueue = (ImageView)findViewById(R.id.title_imgqueuebutton);
+				if(isShowingQueue)
+					imgqueue.setImageResource(R.drawable.player_image);
+				imgqueue.setOnClickListener(imgQueueListener);
 				return;
 			}
 		}
@@ -121,6 +145,7 @@ public class MainActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		
+		isShowingQueue = false;
 		fragmentChanged = false;
 		backStack = new ArrayList<MainScreenFragment>();
 		resetBackStack();

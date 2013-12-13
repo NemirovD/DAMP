@@ -1,4 +1,4 @@
-package com.example.dampdesign;
+package ca.nemirovd.damp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -16,7 +16,8 @@
 
     <TwoLineListItem
         android:layout_width="fill_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
         <TextView
             android:id="@+id/title_songscreen_text_1"
@@ -48,5 +49,12 @@
         	android:marqueeRepeatLimit ="marquee_forever"
         	android:scrollHorizontally="true" />
     </TwoLineListItem>
+    
+    <ImageView 
+        android:id="@+id/title_imgqueuebutton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/player_queue" />
 
 </LinearLayout>

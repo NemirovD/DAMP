@@ -1,4 +1,5 @@
-package com.example.dampdesign.Fragments;
+package ca.nemirovd.damp.Fragments;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.dampdesign.MainActivity;
-import com.example.dampdesign.R;
-import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListFragment;
-import com.example.dampdesign.Fragments.ListFragments.ArtistList.ArtistListFragment;
-import com.example.dampdesign.Fragments.ListFragments.SongList.SongListFragment;
+import ca.nemirovd.damp.MainActivity;
+import ca.nemirovd.damp.Fragments.ListFragments.AlbumList.AlbumListFragment;
+import ca.nemirovd.damp.Fragments.ListFragments.ArtistList.ArtistListFragment;
+import ca.nemirovd.damp.Fragments.ListFragments.SongList.SongListFragment;
+
+import ca.nemirovd.damp.R;
+
 
 public class MenuFragment extends Fragment {
 	

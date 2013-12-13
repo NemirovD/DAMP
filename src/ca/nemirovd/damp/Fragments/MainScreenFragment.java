@@ -1,8 +1,9 @@
-package com.example.dampdesign.Fragments;
+package ca.nemirovd.damp.Fragments;
+
+import ca.nemirovd.damp.SortListDialog;
 
 import android.support.v4.app.Fragment;
 
-import com.example.dampdesign.SortListDialog;
 
 public abstract class MainScreenFragment extends Fragment {
 	public abstract SortListDialog getSortDialog();

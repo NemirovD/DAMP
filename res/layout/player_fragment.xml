@@ -5,12 +5,20 @@
     android:orientation="vertical"
     android:background="#FFFFFF" >
 
-    <ImageView
-        android:id="@+id/player_image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/grayscale_logo"/>
+    <FrameLayout
+        android:id="@+id/player_centerstage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/player_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/grayscale_logo" />
+
+    </FrameLayout>
     
     <SeekBar
         android:id="@+id/player_seekBar"

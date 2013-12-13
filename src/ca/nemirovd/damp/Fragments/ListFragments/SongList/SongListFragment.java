@@ -1,4 +1,5 @@
-package com.example.dampdesign.Fragments.ListFragments.SongList;
+package ca.nemirovd.damp.Fragments.ListFragments.SongList;
+
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,11 +11,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.example.dampdesign.MainActivity;
-import com.example.dampdesign.R;
-import com.example.dampdesign.SortListDialog;
-import com.example.dampdesign.Fragments.MainScreenFragment;
-import com.example.dampdesign.Fragments.ListFragments.AlbumList.AlbumListAdapter;
+import ca.nemirovd.damp.MainActivity;
+import ca.nemirovd.damp.SortListDialog;
+import ca.nemirovd.damp.Fragments.MainScreenFragment;
+import ca.nemirovd.damp.Fragments.ListFragments.AlbumList.AlbumListAdapter;
+
+import ca.nemirovd.damp.R;
+
 
 public class SongListFragment extends MainScreenFragment {
 	private SongListAdapter ad;
